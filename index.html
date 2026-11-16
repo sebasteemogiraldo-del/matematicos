@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Newton y Leibniz: los padres del cálculo</title>
+<style>
+:root{--ink:#1d2433;--paper:#fbf8f1;--accent:#b5562b;--accent2:#2a6f77;--gold:#d9a441;--card:#ffffff;--muted:#5c6474}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Georgia,"Times New Roman",serif;color:var(--ink);background:var(--paper);line-height:1.65}
+h1,h2,h3{font-family:"Trebuchet MS",Verdana,sans-serif;line-height:1.2}
+nav{position:sticky;top:0;z-index:10;background:var(--ink);padding:.6rem 1rem;display:flex;flex-wrap:wrap;gap:.4rem;justify-content:center}
+nav a{color:#fff;text-decoration:none;font:600 .85rem "Trebuchet MS",sans-serif;padding:.35rem .7rem;border-radius:20px}
+nav a:hover{background:var(--accent)}
+section{padding:3.5rem 1.2rem;max-width:1000px;margin:0 auto}
+section.alt{background:#f1ebdd;max-width:none}
+section.alt>div{max-width:1000px;margin:0 auto}
+.sec-title{font-size:2rem;margin:0 0 .3rem;color:var(--accent)}
+.sec-sub{color:var(--muted);margin-top:0}
+.hero{background:linear-gradient(135deg,#1d2433,#2a6f77);color:#fff;text-align:center;padding:4.5rem 1.2rem}
+.hero h1{font-size:2.6rem;margin:.2rem 0}
+.hero .quote{font-style:italic;font-size:1.25rem;max-width:700px;margin:1.2rem auto;opacity:.95}
+.hero svg{max-width:340px;width:100%;height:auto;margin-top:1rem}
+.card{background:var(--card);border-radius:12px;padding:1.2rem 1.4rem;box-shadow:0 2px 10px rgba(0,0,0,.07);margin:1rem 0}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem}
+.box{border-left:5px solid var(--gold);background:#fff8e6;padding:.9rem 1.1rem;border-radius:8px;margin:1rem 0}
+.solve{background:#eef6f6;border-left:5px solid var(--accent2);padding:1rem 1.2rem;border-radius:8px;margin:1rem 0;font-family:"Courier New",monospace;font-size:.95rem;white-space:pre-wrap}
+.tl{position:relative;padding-left:1.4rem;border-left:3px solid var(--accent2)}
+.tl .item{margin:0 0 1.1rem 0;position:relative}
+.tl .item::before{content:"";position:absolute;left:-1.95rem;top:.45rem;width:12px;height:12px;border-radius:50%;background:var(--accent)}
+.tl .year{font:700 .95rem "Trebuchet MS",sans-serif;color:var(--accent2)}
+button{font:600 .95rem "Trebuchet MS",sans-serif;background:var(--accent);color:#fff;border:0;border-radius:8px;padding:.6rem 1.1rem;cursor:pointer;transition:all .2s ease}
+button:hover{filter:brightness(1.08)}
+button.sec{background:var(--accent2)}
+
+/* Estilos para el juego de emparejar */
+.match-header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem;padding-bottom:.8rem;border-bottom:1px solid #e5dec9}
+.match-grid{display:grid;grid-template-columns:1fr 1.6fr;gap:1.2rem}
+@media(max-width:650px){.match-grid{grid-template-columns:1fr}}
+.match-col{display:flex;flex-direction:column;gap:.6rem}
+.match-col h4{margin:0 0 .3rem;font-family:"Trebuchet MS",sans-serif;color:var(--accent2);font-size:.95rem;text-transform:uppercase;letter-spacing:.5px}
+.m-btn{display:block;width:100%;text-align:left;background:#fff;color:var(--ink);border:2px solid #d8d2c4;font-weight:400;font-family:Georgia,serif;padding:.75rem 1rem;border-radius:8px;line-height:1.4}
+.m-btn.term{font-family:"Trebuchet MS",sans-serif;font-weight:700;text-align:center}
+.m-btn:hover:not(:disabled){border-color:var(--accent2);background:#f4fbfb;filter:none}
+.m-btn.selected{border-color:var(--accent);background:#fff3ec;box-shadow:0 0 0 2px rgba(181,86,43,.25)}
+.m-btn.matched{background:#d9f2dc;border-color:#3c9a4a;color:#1e5626;cursor:default;opacity:.85}
+.m-btn.wrong{background:#f9dcd6;border-color:#c0392b;animation:shake .3s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+
+.pill{display:inline-block;background:var(--gold);color:var(--ink);border-radius:20px;padding:.15rem .75rem;font:600 .85rem "Trebuchet MS",sans-serif}
+.fact{background:#fff;border-radius:12px;padding:1rem 1.2rem;border-top:4px solid var(--accent2)}
+.fact h3{margin:.2rem 0;font-size:1.05rem;color:var(--accent2)}
+footer{background:var(--ink);color:#ddd;text-align:center;padding:1.5rem;font-size:.9rem}
+ol.apa li{margin-bottom:.8rem;padding-left:.3rem}
+.hl{color:var(--accent);font-weight:bold}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#inicio">Inicio</a>
+  <a href="#biografia">Biografía</a>
+  <a href="#linea">Línea de tiempo</a>
+  <a href="#aportes">Aportes</a>
+  <a href="#impacto">Impacto hoy</a>
+  <a href="#podcast">Podcast</a>
+  <a href="#juego">Juego</a>
+  <a href="#curiosos">Datos curiosos</a>
+  <a href="#fuentes">Fuentes</a>
+</nav>
+
+<!-- 1. INICIO -->
+<header id="inicio" class="hero">
+  <span class="pill">Divulgación matemática</span>
+  <h1>Isaac Newton &amp; Gottfried Wilhelm Leibniz</h1>
+  <p>Dos genios que, casi al mismo tiempo y por caminos distintos, inventaron el cálculo infinitesimal.</p>
+  <p class="quote">“Si he visto más lejos, es porque me he subido a hombros de gigantes.”<br><small>— Isaac Newton, carta a Robert Hooke (1676)</small></p>
+  <svg viewBox="0 0 400 220" role="img" aria-label="Ilustración: manzana, curva parabólica y tangente">
+    <rect width="400" height="220" rx="16" fill="#ffffff22"/>
+    <path d="M30 190 Q200 -40 370 190" fill="none" stroke="#d9a441" stroke-width="5"/>
+    <line x1="120" y1="150" x2="290" y2="60" stroke="#fff" stroke-width="3" stroke-dasharray="8 6"/>
+    <circle cx="200" cy="100" r="6" fill="#fff"/>
+    <circle cx="60" cy="50" r="22" fill="#c0392b"/>
+    <path d="M60 28 q6 -12 14 -10" stroke="#5b8c3a" stroke-width="4" fill="none"/>
+    <path d="M60 28 q-4 -8 -2 -14" stroke="#7a4a1f" stroke-width="4" fill="none"/>
+    <text x="200" y="210" font-size="14" fill="#fff" text-anchor="middle" font-family="Trebuchet MS">Manzana · parábola · tangente</text>
+  </svg>
+</header>
+
+<!-- 2. BIOGRAFÍA -->
+<section id="biografia">
+  <h2 class="sec-title">Biografía</h2>
+  <p class="sec-sub">Dos vidas del siglo XVII, una revolución científica y una rivalidad histórica.</p>
+  <div class="grid2">
+    <div class="card">
+      <h3>Isaac Newton</h3>
+      <p><span class="hl">Nacimiento:</span> 4 de enero de 1643 (calendario gregoriano), Woolsthorpe, Lincolnshire, Inglaterra. <br><span class="hl">Muerte:</span> 31 de marzo de 1727, Londres.</p>
+      <p><span class="hl">Formación:</span> Estudió en el Trinity College de la Universidad de Cambridge. Durante la peste de 1665-1666 regresó a su casa familiar, período en que sentó las bases de sus descubrimientos (los llamados <em>annus mirabilis</em>).</p>
+      <p><span class="hl">Hechos clave:</span> Fue catedrático lucasiano de Matemáticas en Cambridge (1669), publicó los <em>Principia</em> (1687), dirigió la Casa de la Moneda inglesa y presidió la Royal Society.</p>
+    </div>
+    <div class="card">
+      <h3>Gottfried Wilhelm Leibniz</h3>
+      <p><span class="hl">Nacimiento:</span> 1 de julio de 1646, Leipzig, Sajonia (Sacro Imperio). <br><span class="hl">Muerte:</span> 14 de noviembre de 1716, Hannover.</p>
+      <p><span class="hl">Formación:</span> Autodidacta en gran parte; estudió derecho, filosofía y matemáticas. Se formó en contacto con matemáticos europeos durante sus viajes a París (1672-1676) y Londres.</p>
+      <p><span class="hl">Hechos clave:</span> Fue diplomático, bibliotecario, consejero de príncipes y filósofo. Diseñó una calculadora mecánica, desarrolló el sistema binario moderno y fundó la Academia de Berlín.</p>
+    </div>
+  </div>
+  <div class="box"><strong>Contexto histórico:</strong> La Europa del siglo XVII vivía la Revolución Científica: Galileo, Kepler y Descartes habían transformado la astronomía, la geometría y la física. Había que describir el movimiento y el cambio, y las herramientas antiguas ya no bastaban. Newton y Leibniz respondieron con el cálculo, mientras la Guerra de los Treinta Años, las guerras de religión y la expansión comercial marcaban su tiempo.</div>
+</section>
+
+<!-- 3. LÍNEA DE TIEMPO -->
+<section id="linea" class="alt">
+  <div>
+    <h2 class="sec-title">Línea de tiempo</h2>
+    <p class="sec-sub">Momentos clave de su vida y obra.</p>
+    <div class="tl">
+      <div class="item"><span class="year">1643</span><br>Nace Newton en Woolsthorpe.</div>
+      <div class="item"><span class="year">1646</span><br>Nace Leibniz en Leipzig.</div>
+      <div class="item"><span class="year">1665–1666</span><br>Newton trabaja en fluxiones, óptica y gravitación durante la peste.</div>
+      <div class="item"><span class="year">1669</span><br>Newton es nombrado catedrático lucasiano en Cambridge.</div>
+      <div class="item"><span class="year">1672–1676</span><br>Leibniz está en París; allí construye su calculadora y estudia matemáticas.</div>
+      <div class="item"><span class="year">1675</span><br>Leibniz escribe por primera vez el signo integral ∫ y la notación dx.</div>
+      <div class="item"><span class="year">1684</span><br>Leibniz publica <em>Nova methodus</em>, la primera exposición impresa del cálculo diferencial.</div>
+      <div class="item"><span class="year">1687</span><br>Newton publica los <em>Principia Mathematica</em>: la ley de gravitación universal.</div>
+      <div class="item"><span class="year">1704</span><br>Newton publica <em>Opticks</em> y su método de fluxiones aparece en un anexo.</div>
+      <div class="item"><span class="year">1712</span><br>La Royal Society publica un informe, redactado en gran parte por Newton, que favorece su prioridad.</div>
+      <div class="item"><span class="year">1716</span><br>Muere Leibniz en Hannover, aislado y en plena disputa.</div>
+      <div class="item"><span class="year">1727</span><br>Muere Newton en Londres y es sepultado en la Abadía de Westminster.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. APORTES -->
+<section id="aportes">
+  <h2 class="sec-title">Aportes a las matemáticas</h2>
+  <p class="sec-sub">El cálculo: la matemática del cambio. Ambos llegaron a ideas equivalentes, pero con enfoques y notaciones distintas.</p>
+
+  <div class="grid2">
+    <div class="card">
+      <h3>Newton: fluxiones y gravitación</h3>
+      <p>Pensaba las magnitudes como cantidades que “fluyen” en el tiempo. A la tasa de cambio la llamó <em>fluxión</em> y a la cantidad que fluye, <em>fluente</em>. Su método le permitió calcular velocidades, tangentes y áreas, y lo usó para deducir las leyes del movimiento y la gravitación universal.</p>
+      <p>También generalizó el teorema del binomio para exponentes fraccionarios y negativos, y desarrolló el método numérico que hoy lleva su nombre.</p>
+    </div>
+    <div class="card">
+      <h3>Leibniz: la notación que usamos hoy</h3>
+      <p>Pensaba en “diferenciales” infinitamente pequeños <em>dx</em> y <em>dy</em> y en sumas infinitas. Sus símbolos son los que usamos hoy: <em>dy/dx</em> para la derivada y <em>∫</em> para la integral. Además, la regla del producto y la del cociente llevan su huella.</p>
+      <p>Su aporte a la lógica simbólica y al sistema binario anticipó la computación moderna.</p>
+    </div>
+  </div>
+
+  <h3>Ejemplo 1: derivada de una potencia (Leibniz)</h3>
+  <div class="solve">Calcular d/dx (x³) usando el límite del cociente incremental.
+
+d/dx x³ = lím(h→0) [(x+h)³ − x³] / h
+        = lím(h→0) [3x²h + 3xh² + h³] / h
+        = lím(h→0) (3x² + 3xh + h²)
+        = 3x²
+
+Resultado: d/dx (xⁿ) = n·xⁿ⁻¹ (aquí n = 3).</div>
+
+  <h3>Ejemplo 2: área bajo una curva (integral)</h3>
+  <div class="solve">Calcular ∫₀³ x² dx.
+
+Primitiva: F(x) = x³/3
+∫₀³ x² dx = F(3) − F(0) = 27/3 − 0 = 9
+
+Interpretación: el área bajo la parábola y = x² entre x = 0 y x = 3 es 9 unidades cuadradas.</div>
+
+  <h3>Ejemplo 3: método de Newton para aproximar una raíz</h3>
+  <p>Queremos aproximar √2, es decir, la raíz positiva de f(x) = x² − 2. La fórmula iterativa es:</p>
+  <div class="solve">xₙ₊₁ = xₙ − f(xₙ) / f′(xₙ) = xₙ − (xₙ² − 2) / (2xₙ)
+
+Con x₀ = 1:
+x₁ = 1 − (1 − 2)/2 = 1.5
+x₂ = 1.5 − (2.25 − 2)/3 ≈ 1.41667
+x₃ ≈ 1.414216
+
+√2 ≈ 1.414214 ✔ (en solo tres pasos)</div>
+
+  <div class="box"><strong>Dato clave:</strong> Ambos usan la idea de la derivada como tasa de cambio y de la integral como suma de infinitesimales. Este es el núcleo del Teorema fundamental del cálculo, que conecta ambas operaciones.</div>
+</section>
+
+<!-- 5. IMPACTO HOY -->
+<section id="impacto" class="alt">
+  <div>
+    <h2 class="sec-title">Impacto hoy</h2>
+    <p class="sec-sub">Lo que inventaron hace más de 300 años sigue en casi todo lo que usamos.</p>
+    <div class="grid2">
+      <div class="fact"><h3>Ciencia</h3><p>Las ecuaciones diferenciales describen epidemias, el clima, la dinámica de poblaciones y la órbita de satélites. La mecánica celeste de Newton sigue siendo la base de la navegación espacial.</p></div>
+      <div class="fact"><h3>Ingeniería</h3><p>Diseño de puentes, aviones y circuitos eléctricos. Calcular esfuerzos o flujos depende de derivadas e integrales.</p></div>
+      <div class="fact"><h3>Computación</h3><p>El sistema binario de Leibniz es la base de todos los procesadores. Los algoritmos de optimización y de aprendizaje automático usan gradientes, que son derivadas en varias variables.</p></div>
+      <div class="fact"><h3>Vida diaria</h3><p>GPS, animación por computadora, predicción del tiempo, cálculo de intereses y de dosis de medicamentos: todo usa cálculo.</p></div>
+    </div>
+    <div class="box"><strong>Ejemplo cotidiano:</strong> Un GPS calcula tu velocidad como la derivada de tu posición respecto al tiempo, y estima tu distancia recorrida integrando esa velocidad.</div>
+  </div>
+</section>
+
+<!-- 6. PODCAST -->
+<section id="podcast">
+  <h2 class="sec-title">Podcast: “La guerra de los infinitesimales”</h2>
+  <p class="sec-sub">Episodio de unos 4 minutos. Guion preparado con apoyo de IA; puedes escucharlo con la narración del navegador.</p>
+  <div class="card">
+    <button id="playBtn" onclick="narrar()">▶ Escuchar episodio</button>
+    <button class="sec" onclick="detener()">■ Detener</button>
+    <div id="guion" style="margin-top:1rem">
+      <p><strong>[Intro]</strong> Bienvenidos a Matemáticas en Voz Alta. Hoy hablamos de dos gigantes que, sin conocerse del todo, inventaron el cálculo.</p>
+      <p><strong>[Cuerpo 1]</strong> Isaac Newton nació en 1643 en Inglaterra. Durante la peste de 1665 se encerró en su casa de campo y, en pocos meses, desarrolló sus fluxiones. Con ellas explicó por qué la manzana cae y por qué la Luna gira alrededor de la Tierra.</p>
+      <p><strong>[Cuerpo 2]</strong> Gottfried Wilhelm Leibniz, en Alemania, trabajaba con otra idea: sumas de cantidades infinitamente pequeñas. Él creó la notación dx y el signo ∫ que todavía usamos. Publicó su método en 1684, antes que Newton publicara el suyo.</p>
+      <p><strong>[Conflicto]</strong> Surgió entonces una disputa de prioridad. Cada bando acusaba al otro de plagio, y la Royal Society, presidida por Newton, emitió un informe a su favor. Hoy los historiadores creen que ambos llegaron de forma independiente.</p>
+      <p><strong>[Cierre]</strong> El resultado fue beneficioso para todos: la notación de Leibniz se impuso en el continente y, gracias a ella, la matemática avanzó. Hoy, cada vez que un GPS calcula tu ruta, usa ideas que ambos forjaron. Hasta la próxima.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 7. JUEGO DE EMPAREJAR -->
+<section id="juego" class="alt">
+  <div>
+    <h2 class="sec-title">Juego: empareja términos y definiciones</h2>
+    <p class="sec-sub">Haz clic en un término de la izquierda y luego en su definición correspondiente de la derecha.</p>
+    <div class="card" id="match-game"></div>
+  </div>
+</section>
+
+<!-- 8. DATOS CURIOSOS -->
+<section id="curiosos">
+  <h2 class="sec-title">Datos curiosos</h2>
+  <p class="sec-sub">Anécdotas y hechos poco conocidos.</p>
+  <div class="grid2">
+    <div class="fact"><h3>La manzana</h3><p>La historia de la manzana que cayó sobre Newton es probablemente una anécdota exagerada. Él mismo contaba que la idea de la gravedad surgió al observar la caída de una manzana, aunque no hay pruebas de un golpe en la cabeza.</p></div>
+    <div class="fact"><h3>El signo ∫</h3><p>Leibniz eligió ∫ como una “S” alargada, inicial de <em>summa</em> (suma en latín). Lo escribió por primera vez en un manuscrito de 1675.</p></div>
+    <div class="fact"><h3>Newton y la alquimia</h3><p>Escribió más páginas sobre alquimia y teología que sobre física. Sus escritos alquímicos se conservan y hoy se estudian con gran interés.</p></div>
+    <div class="fact"><h3>Leibniz y el binario</h3><p>Creía que el sistema binario (con solo 0 y 1) reflejaba la creación del mundo desde la nada. Lo pensó como una metáfora filosófica antes de que la computación lo usara.</p></div>
+    <div class="fact"><h3>Un enemigo común</h3><p>Ambos tenían un rival compartido: John Flamsteed, astrónomo real, con quien Newton tuvo disputas personales muy intensas.</p></div>
+    <div class="fact"><h3>Un prolongado silencio</h3><p>Leibniz murió en 1716 y, según algunos relatos, su entierro tuvo muy pocos asistentes, en parte por la controversia que lo había dejado aislado.</p></div>
+  </div>
+</section>
+
+<!-- 9. FUENTES -->
+<section id="fuentes" class="alt">
+  <div>
+    <h2 class="sec-title">Fuentes</h2>
+    <p class="sec-sub">Referencias consultadas en formato APA (7.ª edición). Verifica los datos de edición antes de citarlas.</p>
+    <ol class="apa">
+      <li>Boyer, C. B., &amp; Merzbach, U. C. (2011). <em>A history of mathematics</em> (3.ª ed.). John Wiley &amp; Sons.</li>
+      <li>Bardi, J. S. (2006). <em>The calculus wars: Newton, Leibniz, and the greatest mathematical clash of all time</em>. Thunder’s Mouth Press.</li>
+      <li>Burton, D. M. (2011). <em>The history of mathematics: An introduction</em> (7.ª ed.). McGraw-Hill.</li>
+      <li>Hall, A. R. (1980). <em>Philosophers at war: The quarrel between Newton and Leibniz</em>. Cambridge University Press.</li>
+      <li>Newton, I. (1687). <em>Philosophiæ naturalis principia mathematica</em>. Royal Society.</li>
+      <li>Westfall, R. S. (1980). <em>Never at rest: A biography of Isaac Newton</em>. Cambridge University Press.</li>
+    </ol>
+  </div>
+</section>
+
+<footer>Página creada como proyecto de divulgación sobre Isaac Newton y Gottfried Wilhelm Leibniz.</footer>
+
+<script>
+// ----- Podcast (narración con voz del navegador) -----
+function narrar(){
+  if(!('speechSynthesis' in window)){alert('Tu navegador no soporta narración por voz.');return;}
+  speechSynthesis.cancel();
+  const texto = document.getElementById('guion').innerText;
+  const u = new SpeechSynthesisUtterance(texto);
+  u.lang='es-ES'; u.rate=0.95;
+  speechSynthesis.speak(u);
+}
+function detener(){ if('speechSynthesis' in window) speechSynthesis.cancel(); }
+
+// ----- Juego de emparejar términos y definiciones -----
+const pares = [
+  { id: 1, term: "Fluxión", def: "Nombre que dio Newton a la tasa instantánea de cambio de una magnitud (derivada)." },
+  { id: 2, term: "Diferencial (dx)", def: "Incremento infinitamente pequeño introducido en la notación de Leibniz." },
+  { id: 3, term: "Símbolo ∫", def: "S alargada derivada de la palabra latina 'summa' que representa la integral." },
+  { id: 4, term: "Teorema Fundamental", def: "Principio que demuestra que la derivación y la integración son operaciones inversas." },
+  { id: 5, term: "Método de Newton", def: "Algoritmo iterativo que usa rectas tangentes para aproximar las raíces de una función." },
+  { id: 6, term: "Sistema Binario", def: "Sistema numérico de base 2 (ceros y unos) perfeccionado por Leibniz." }
+];
+
+let selTerm = null;
+let selDef = null;
+let aciertos = 0;
+let errores = 0;
+
+function mezclar(array) {
+  const copia = [...array];
+  for (let i = copia.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copia[i], copia[j]] = [copia[j], copia[i]];
+  }
+  return copia;
+}
+
+function iniciarEmparejamiento() {
+  selTerm = null;
+  selDef = null;
+  aciertos = 0;
+  errores = 0;
+
+  const cont = document.getElementById('match-game');
+  const terminosMezclados = mezclar(pares);
+  const definicionesMezcladas = mezclar(pares);
+
+  cont.innerHTML = `
+    <div class="match-header">
+      <div>
+        <span class="pill" id="score-pill">Parejas: 0 / ${pares.length}</span>
+        <span style="margin-left:.6rem;font-size:.9rem;color:var(--muted)" id="err-pill">Errores: 0</span>
+      </div>
+      <button class="sec" onclick="iniciarEmparejamiento()" style="padding:.4rem .85rem;font-size:.85rem">↻ Mezclar y reiniciar</button>
+    </div>
+    <div id="match-msg" style="margin-bottom:.8rem;min-height:1.5rem;font-weight:bold;color:var(--accent2)"></div>
+    <div class="match-grid">
+      <div class="match-col" id="col-terms">
+        <h4>Términos</h4>
+        ${terminosMezclados.map(p => `<button class="m-btn term" data-id="${p.id}" onclick="seleccionar('term', ${p.id}, this)">${p.term}</button>`).join('')}
+      </div>
+      <div class="match-col" id="col-defs">
+        <h4>Definiciones</h4>
+        ${definicionesMezcladas.map(p => `<button class="m-btn def" data-id="${p.id}" onclick="seleccionar('def', ${p.id}, this)">${p.def}</button>`).join('')}
+      </div>
+    </div>
+  `;
+}
+
+function seleccionar(tipo, id, btn) {
+  if (btn.classList.contains('matched')) return;
+
+  // Limpiar selección previa en la misma columna
+  const colSelector = tipo === 'term' ? '#col-terms .m-btn' : '#col-defs .m-btn';
+  document.querySelectorAll(colSelector).forEach(b => b.classList.remove('selected', 'wrong'));
+  btn.classList.add('selected');
+
+  if (tipo === 'term') selTerm = { id, btn };
+  if (tipo === 'def') selDef = { id, btn };
+
+  // Si hay uno de cada columna seleccionado, verificar
+  if (selTerm && selDef) {
+    const t = selTerm;
+    const d = selDef;
+    selTerm = null;
+    selDef = null;
+
+    if (t.id === d.id) {
+      t.btn.classList.remove('selected');
+      d.btn.classList.remove('selected');
+      t.btn.classList.add('matched');
+      d.btn.classList.add('matched');
+      t.btn.disabled = true;
+      d.btn.disabled = true;
+      aciertos++;
+      document.getElementById('score-pill').textContent = `Parejas: ${aciertos} / ${pares.length}`;
+      
+      if (aciertos === pares.length) {
+        document.getElementById('match-msg').innerHTML = `🎉 ¡Excelente! Completaste todas las parejas con ${errores} ${errores === 1 ? 'error' : 'errores'}.`;
+      } else {
+        document.getElementById('match-msg').textContent = '✔ ¡Pareja correcta!';
+      }
+    } else {
+      errores++;
+      document.getElementById('err-pill').textContent = `Errores: ${errores}`;
+      document.getElementById('match-msg').innerHTML = '<span style="color:#c0392b">✖ No coinciden, intenta de nuevo.</span>';
+      t.btn.classList.add('wrong');
+      d.btn.classList.add('wrong');
+      setTimeout(() => {
+        t.btn.classList.remove('selected', 'wrong');
+        d.btn.classList.remove('selected', 'wrong');
+      }, 500);
+    }
+  }
+}
+
+iniciarEmparejamiento();
+</script>
+</body>
+</html>
